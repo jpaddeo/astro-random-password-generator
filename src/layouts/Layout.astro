@@ -1,0 +1,41 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='generator' content={Astro.generator} />
+
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:site' content='@jpaddeo' />
+    <meta name='twitter:creator' content='@jpaddeo' />
+    <meta name='twitter:title' content='Random Password Generator' />
+    <meta
+      name='twitter:description'
+      content='Make a pretty random password with this generator.'
+    />
+    <meta name='twitter:image' content='https://randpass.jpaddeo.xyz' />
+
+    <meta property='og:image' content='https://randpass.jpaddeo.xyz' />
+    <meta property='og:title' content='Random Password Generator' />
+    <meta
+      property='og:description'
+      content='Make a pretty random password with this generator.'
+    />
+    <meta property='og:site_name' content='JPA Random Password Generator' />
+    <meta property='og:type' content='website' />
+
+    <title>{title}</title>
+  </head>
+  <body class='bg-[#170f1e]'>
+    <slot />
+  </body>
+</html>
