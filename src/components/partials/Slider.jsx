@@ -14,13 +14,15 @@ export default function Slider() {
     <div className='flex items-center justify-center gap-2 text-white'>
       <span className='uppercase'>Length</span>
       <input
+        id='slider'
+        name='slider'
         type='range'
         min={MIN_PASSWORD_LENGTH}
         max={MAX_PASSWORD_LENGTH}
         value={passwordLength}
         onInput={handleChangeLength}
       />
-      <label>{passwordLength}</label>
+      <label htmlFor='slider'>{passwordLength}</label>
     </div>
   );
 }
