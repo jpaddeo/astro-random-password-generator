@@ -8,9 +8,11 @@ import {
 } from '@/hooks/usePasswordGenerator.jsx';
 
 import { LockIcon } from '@/components/icons/index.jsx';
+import CopiedPasswords from '@/components/CopiedPasswords';
 
 function InnerGenerator() {
-  const { generatedPassword, strength } = usePasswordGenerator();
+  const { generatedPassword, strength, copiedPasswords } =
+    usePasswordGenerator();
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 bg-gray-500 max-w-sm md:max-w-lg mx-auto p-6 mt-6 rounded-lg shadow-sm shadow-gray-200 font-mono bg-gradient-to-r from-gray-900 via-gray-600 to-gray-900'>
@@ -29,12 +31,13 @@ function InnerGenerator() {
             ? 'text-green-600'
             : strength === 'medium'
             ? 'text-yellow-600'
-            : ''
+            : 'text-red-600'
         }`}
       >
         {strength}
       </span>
       <GeneratorOptions />
+      {copiedPasswords.length > 0 && <CopiedPasswords />}
       <footer className='text-sm text-white'>
         <span>
           Developed with 💙 by{' '}

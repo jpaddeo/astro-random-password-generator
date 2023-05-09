@@ -19,6 +19,7 @@ const MEDIUM_STRENGH_LEVEL =
   '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})';
 const STRONG_STRENGH_LEVEL =
   '((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))';
+const LATEST_COPIED_PASSWORD_COUNT = -3;
 
 export const PasswordGeneratorContextProvider = ({ children }) => {
   const [passwordLength, setPasswordLength] = useState(INITIAL_PASSWORD_LENGTH);
@@ -26,6 +27,10 @@ export const PasswordGeneratorContextProvider = ({ children }) => {
   const [generatedPassword, setGeneratedPassword] = useState('');
   const [copied, setCopied] = useState(false);
   const [strength, setStrength] = useState('low');
+  const [copiedPasswords, setCopiedPasswords] = useState(() => {
+    const copiedPasswordStr = localStorage.getItem('randpass.copiedPasswords');
+    return copiedPasswordStr ? JSON.parse(copiedPasswordStr) : [];
+  });
 
   const generatePassword = useCallback(() => {
     let password = '';
@@ -68,8 +73,22 @@ export const PasswordGeneratorContextProvider = ({ children }) => {
 
   const copyPassword = async () => {
     await navigator.clipboard.writeText(generatedPassword);
+    setCopiedPasswords((prevCopiedPasswords) => {
+      const newPasswords = [...prevCopiedPasswords, generatedPassword];
+      const newUniquePasswords = [...new Set(newPasswords)].slice(LATEST_COPIED_PASSWORD_COUNT);
+      localStorage.setItem(
+        'randpass.copiedPasswords',
+        JSON.stringify(newUniquePasswords)
+      );
+      return newUniquePasswords;
+    });
     setCopied(true);
     setTimeout(() => setCopied(false), COPIED_ALERT_TIMEOUT);
+  };
+
+  const clearCopiedPasswords = () => {
+    localStorage.setItem('randpass.copiedPasswords', JSON.stringify([]));
+    setCopiedPasswords([]);
   };
 
   useEffect(() => {
@@ -88,6 +107,8 @@ export const PasswordGeneratorContextProvider = ({ children }) => {
         generatePassword,
         generatedPassword,
         strength,
+        copiedPasswords,
+        clearCopiedPasswords,
       }}
     >
       {children}
