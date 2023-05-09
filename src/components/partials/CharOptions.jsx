@@ -21,11 +21,11 @@ export default function CharOptions() {
             onChange={handleOptionChange}
             checked={options.includes(char)}
             disabled={char === 'LETTERS'}
-            className='w-4 h-4 text-blue-600 bg-gray-100 rounded-lg border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+            className='w-4 h-4 text-blue-600 rounded-lg focus:ring-blue-600 ring-offset-gray-800 focus:ring-2 bg-gray-700 border-gray-600'
           />
           <label
             htmlFor={char}
-            className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-200'
+            className='ml-2 text-sm font-medium text-gray-200'
           >
             {char}
           </label>

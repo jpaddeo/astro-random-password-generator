@@ -5,12 +5,12 @@ export default function PasswordCard({ password }) {
 
   return (
     <div
-      className={`bg-gray-900 dark:bg-gray-200 p-6 rounded-xl w-full break-all tracking-widest font-bold ${
+      className={`bg-gray-200 p-6 rounded-xl w-full break-all tracking-widest font-bold border-4 ${
         strength === 'strong'
-          ? 'border-4 border-green-600 border-dotted'
+          ? 'border-green-600 border-dashed'
           : strength === 'medium'
-          ? 'border-4 border-yellow-600 border-dotted'
-          : ''
+          ? 'border-yellow-600 border-dashed'
+          : 'border-red-600 border-dashed'
       }`}
       aria-label={password}
       role='heading'
