@@ -7,7 +7,7 @@ export default function CopiedPasswords() {
   return (
     <div className='w-full'>
       <span className='text-white flex items-center justify-center gap-2'>
-        Latest {copiedPasswords.length} copied passwords{' '}
+        Last {copiedPasswords.length} copied passwords{' '}
         <button onClick={clearCopiedPasswords} title='Copy'>
           <RefreshIcon className='w-5 h-5' />
         </button>
